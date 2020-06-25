@@ -1,27 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Corona Wars</title>
-    <script
-    src="https://kit.fontawesome.com/acb7604fb9.js"
-    crossorigin="anonymous"
-  ></script>
-    <script type="module" src="app.js"></script>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <section id="main-section">
-      <img class="logo" src="images/output-onlinepngtools.png">
-      <div id="score">
-        <p class="maj">SCORE : <span id="thescore"></span></p>
-        <p class="maj">LIVES : <span id="lives"><i class="fas fa-heart"></i><i class="fas fa-heart"></i><i class="fas fa-heart"></i></span></p>
-    </div>
-    <section id="game-over"></section>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Game</title>
+    <script type="module" src="./start.js"></script>
+    <link rel="stylesheet" href="./startstyles.css">
+</head>
+<body>
+    <section id="start">
+        <img id="logo" src="./images/coronawars.png">
+        <div id="btn-div">
+            <a href="./index.html"><button id="btn-start" class="btn">START GAME</button></a>
+        <button id="btn-rules" class="btn">RULES</button>
+        </div>
+        
     </section>
-    <canvas id="canvas" width="600" height="600"></canvas>
     
-  </body>
+</body>
 </html>
