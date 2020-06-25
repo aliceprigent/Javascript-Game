@@ -113,7 +113,7 @@ body {
 
 .gameover {
     width: 300px;
-    height: 150px;
+    height: 200px;
     background-color: rgba(253, 254, 255, 0.904);
     font-size: 15px;
     color: black;
@@ -129,7 +129,7 @@ body {
 
 .textover {
     text-align: center;
-    margin: 20px;
+    margin: 30px;
     font-size: 17px;
 
 }
@@ -155,9 +155,15 @@ body {
     text-align: center;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-left: 10px;
+    margin-top: 20px;
+    margin-left: 30px;
 }
 
 .btn:hover{
     background-color: darkred;
+}
+
+a {
+    color: white;
+    text-decoration: none;
 }

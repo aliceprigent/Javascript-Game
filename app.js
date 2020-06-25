@@ -6,7 +6,8 @@ var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAni
 
 var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
 
-// ----- Start
+var gameover = false;
+var animationId = undefined;
 
 // ------- Player ------- //
 
@@ -16,10 +17,10 @@ var player = {
   x: 265,
   y: 525,
   moveLeft: function () {
-    this.x -= 35;
+    this.x -= 40;
   },
   moveRight: function () {
-    this.x += 35;
+    this.x += 40;
   },
   
 }
@@ -39,9 +40,9 @@ function drawPlayer(player) {
 //------ Obstacle ------- //
 
 class Obstacle {
-  constructor(x, y, w, h) {
+  constructor(x, y, w, h, speedY) {
     (this.x = x), (this.y = y), (this.w = w), (this.h = h);
-    this.speedY = 5;
+    this.speedY = speedY;
   }
   moveDown() {
     this.y += this.speedY;
@@ -61,15 +62,18 @@ function createObstacle() {
     let minX = 20
     let maxY = -500
     let minY = -30
+    let maxSpeed = 9;
+    let minSpeed = 3;
+    let speedY = Math.floor(Math.random() * (maxSpeed - minSpeed + 1) + minSpeed)
     let x = Math.floor(Math.random() * (maxX - minX + 1) + minX)
     let y = Math.floor(Math.random() * (maxY - minY + 1) + minY)
-    var obstacle = new Obstacle(x, y, 40, 40);
+    var obstacle = new Obstacle(x, y, 40, 40, speedY);
     allObstacles.push(obstacle);
 }
 
 setInterval(function(){ 
     createObstacle(); 
-}, 4000);
+}, 2000);
 
 // ----- Pasta
 
@@ -247,7 +251,7 @@ function updateCanvas() {
     updateVaccin(vaccin);
   });
 
-  requestAnimationFrame(updateCanvas);
+  if (!gameover) animationId = requestAnimationFrame(updateCanvas);
 }
 
 
@@ -285,9 +289,6 @@ function checkCollisions(allObstacles){
       if (allObstacles[i].y >= 600) {
         allObstacles.splice(allObstacles[i-1], 1)
         player.lives -= 1
-        if(player.lives === 0) {
-          gameOver()
-        }
       } else if (player.x < allObstacles[i].x + allObstacles[i].w &&
             player.x + 120 > allObstacles[i].x &&
             player.y < allObstacles[i].y + allObstacles[i].h &&
@@ -297,6 +298,10 @@ function checkCollisions(allObstacles){
              var theScore = document.getElementById('thescore')
              theScore.innerHTML = `${player.score}`
          } 
+
+    }
+    if(player.lives === 0) {
+      gameOver()
     }
    
 } 
@@ -308,16 +313,21 @@ function checkCollisions2(array){
           player.y < array[i].y + array[i].h &&
           80 + player.y > array[i].y) {
            array.splice(array[i-1], 1)
-           player.score -= 10
+           player.score -= 20
            var theScore = document.getElementById('thescore')
            theScore.innerHTML = `${player.score}`
-       } else if (array[i].y === 600) {
+          }
+       else if (array[i].y === 600) {
            array.splice(array[i-1], 1)
        }
-
-  }
+      
+      }
+      if(player.score < 0){
+        gameOver()
  
 } 
+}
+
 
 function checkCollisions3(allHydro){
   for (let i=0; i<allHydro.length; i++){
@@ -367,17 +377,23 @@ function checkLives(){
   else if(player.lives === 1){
     theLives.innerHTML = `<i class="fas fa-heart"></i>`
   }
+  else if(player.lives > 3){
+    player.lives === 3
+  }
   else {
     theLives.innerHTML = ``
   }
 }
 
 function gameOver() {
-    //canvas.remove()
+    canvas.remove()
     var parent = document.getElementById('game-over')
     parent.style.width = '600px';
     parent.style.height = '600px';
     parent.style.visibility = 'visible' 
+    gameover = true;
+    cancelAnimationFrame(animationId);
+    animationId = undefined;
     var gameOver = document.createElement('div')
     gameOver.className = 'gameover'
     parent.prepend(gameOver)  
@@ -386,9 +402,9 @@ function gameOver() {
     gameOver.prepend(textOver)
     textOver.innerHTML = `<p><span class="done"><strong>GAME OVER</strong></span> <br>
     <br>
-    <button class="btn">PLAY AGAIN</button`
-    console.log(animationId)
-    cancelAnimationFrame(animationId)
+    <strong>EVERYONE IS DEAD</strong> !!<br>
+    Just a little flue... They said.
+    <a href="./index.html"><button class="btn">PLAY AGAIN</button></a>`
   }
 
 
@@ -404,12 +420,8 @@ document.addEventListener("keydown", (e) => {
       player.moveRight();
       break;
   }
-  drawPlayer(player);
 });
 
-drawPlayer(player);
-
-var animationId;
 
 imgPlayer.onload = () => {
   imgObstacle.src = "./images/coronavirus-5107715_1280.webp";
