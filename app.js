@@ -313,7 +313,7 @@ function checkCollisions2(array){
           player.y < array[i].y + array[i].h &&
           80 + player.y > array[i].y) {
            array.splice(array[i-1], 1)
-           player.score -= 20
+           player.score = player.score - 20
            var theScore = document.getElementById('thescore')
            theScore.innerHTML = `${player.score}`
           }
