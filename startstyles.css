@@ -22,10 +22,10 @@ body {
 
 #start {
     width: 600px;
-    height: 600px;
+    height: 500px;
     border: 5px black;
     border-radius: 20px;
-    background-image: url('./images/city.jpg');
+    background-color: rgba(253, 254, 255, 0.486);
     background-size: 1000px;
     display:flex;
     justify-content: center;
@@ -87,7 +87,7 @@ body {
     width: 500px;
     height: 250px;
     margin-bottom: 130px;
-    animation: popup 3s;
+    animation: popup 1s;
 }
 
 @keyframes slidein {

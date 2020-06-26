@@ -374,7 +374,7 @@ function gameOver() {
     canvas.remove()
     var parent = document.getElementById('game-over')
     parent.style.width = '600px';
-    parent.style.height = '600px';
+    parent.style.height = '500px';
     parent.style.visibility = 'visible' 
     gameover = true;
     cancelAnimationFrame(animationId);
