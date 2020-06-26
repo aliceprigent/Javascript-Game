@@ -46,9 +46,6 @@ class Obstacle {
   }
   moveDown() {
     this.y += this.speedY;
-    if(this.y === 600){
-        !this.drawObstacle()
-    } 
   }
   drawObstacle() {
     ctx.drawImage(imgObstacle, this.x, this.y, this.w, this.h);
@@ -83,10 +80,7 @@ class Pasta {
     this.speedY = 7;
   }
   moveDown() {
-    this.y += this.speedY;
-    if(this.y === 600){
-        !this.drawPasta()
-    } 
+    this.y += this.speedY; 
   }
   drawPasta() {
     ctx.drawImage(imgPasta, this.x, this.y, this.w, this.h);
@@ -119,9 +113,6 @@ class Pq {
   }
   moveDown() {
     this.y += this.speedY;
-    if(this.y === 600){
-        !this.drawPq()
-    } 
   }
   drawPq() {
     ctx.drawImage(imgPq, this.x, this.y, this.w, this.h);
@@ -154,9 +145,6 @@ class Hydro {
   }
   moveDown() {
     this.y += this.speedY;
-    if(this.y === 600){
-        !this.drawHydro()
-    } 
   }
   drawHydro() {
     ctx.drawImage(imgHydro, this.x, this.y, this.w, this.h);
@@ -189,9 +177,6 @@ class Vaccin {
   }
   moveDown() {
     this.y += this.speedY;
-    if(this.y === 600){
-        !this.drawVaccin()
-    } 
   }
   drawVaccin() {
     ctx.drawImage(imgVaccin, this.x, this.y, this.w, this.h);
@@ -403,7 +388,7 @@ function gameOver() {
     textOver.innerHTML = `<p><span class="done"><strong>GAME OVER</strong></span> <br>
     <br>
     <strong>EVERYONE IS DEAD</strong> !!<br>
-    Just a little flue... They said.
+    Just a little flu... They said.
     <a href="./index.html"><button class="btn">PLAY AGAIN</button></a>`
   }
 
